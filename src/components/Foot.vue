@@ -29,7 +29,7 @@ export default {
   height: 50px;
   bottom: 0;
   background-color: #fff;
-  z-index: 8;
+  /* z-index: 8; */
   -o-border-image: url(https://b.yzcdn.cn/v2/image/wap/border-line-2.png) 2 stretch;
   border-image: url(https://b.yzcdn.cn/v2/image/wap/border-line-2.png) 2 stretch;
   border-top: 2px solid #e5e5e5
@@ -39,7 +39,7 @@ export default {
 only screen and (min--moz-device-pixel-ratio:1.5),
 only screen and (min-device-pixel-ratio:1.5) {
   .bottom-nav {
-    border-top-width: 1px
+    border-top-width: 1px;
   }
 }
 
