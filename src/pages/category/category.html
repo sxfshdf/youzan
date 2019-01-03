@@ -24,7 +24,7 @@
 </head>
 
 <body class=" " style="">
-  <div id="app">
+  <div id="app"  v-cloak>
     <div class="container with-bottom-nav" style="min-height: 667px; height: 667px;">
       <div class="custom-search js-search-bar">
         <form>
@@ -55,7 +55,7 @@
         <div class="class-nav">
           <div id="scroll-nav" style="height: 100%;">
             <ul class="nav" id="scroll-nav-content" style="height: 540px; transform: translate3d(0px, 0px, 0px);">
-              <li class="category-name js-category-name" :data-cid="list.id" v-cloak
+              <li class="category-name js-category-name" :data-cid="list.id"
               v-for="(list,index) in topLists" :key="index"
               @click="getSubLists(index,list.id)"
               :class="{active:index === topIndex}"
@@ -78,7 +78,7 @@
                   </div>
                   <ul>
                     <li class="goods-item" v-for="(list,index) in rankLists.hotGoods">
-                      <a href="https://h5.youzan.com/v2/showcase/goods?alias=27cjv5wdsb4to&amp;source=yzapp&amp;f_platform=yzapp">
+                      <a :href="'goods.html?id='+list.id">
                         <div class="thumb badge center-img">
                           <img :src="list.img">
                           <span class="num">{{index+1}}</span>

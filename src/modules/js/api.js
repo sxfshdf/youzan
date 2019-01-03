@@ -4,7 +4,10 @@ let url = {
   topLists: '/category/topList',
   rank:'/category/rank',
   subLists: '/category/subList',
-  searchList: '/search/list'
+  searchList: '/search/list',
+  details: '/goods/details',
+  deals: '/goods/deal',
+  addCart: '/cart/add'
 }
 
 // 开发环境和真实环境切换

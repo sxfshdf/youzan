@@ -1,0 +1,20 @@
+.fade-enter-active{
+  transition: opacity 0.2s ease;
+}
+.fade-leave-active{
+  transition: opacity 0.2s 0.1s ease;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+.slide-enter-active{
+  transition: all 0.2s 0.1s ease;
+}
+.slide-leave-active{
+  transition: all 0.2s ease;
+}
+.slide-enter, .slide-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(100%);
+}
