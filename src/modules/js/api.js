@@ -7,7 +7,11 @@ let url = {
   searchList: '/search/list',
   details: '/goods/details',
   deals: '/goods/deal',
-  addCart: '/cart/add'
+  addCart: '/cart/add',
+  cartList: '/cart/list',
+  cartReduce: '/cart/reduce',
+  cartRemove: '/cart/remove',
+  cartMremove: '/cart/mrremove'
 }
 
 // 开发环境和真实环境切换
