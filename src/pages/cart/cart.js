@@ -8,6 +8,7 @@ import url from 'js/api.js'
 import Vue from 'vue'
 import mixin from 'js/mixin.js'
 import Velocity from 'velocity-animate'
+import Cart from 'js/cartService.js'
 
 
 new Vue({
@@ -137,19 +138,25 @@ new Vue({
       this.editingShopIndex = shop.editing ? shopIndex : -1
     },
     add(good){
-      axios.post(url.addCart,{
-        id: good.id,
-        number: 1
-      }).then(res=>{
+      // axios.post(url.addCart,{
+      //   id: good.id,
+      //   number: 1
+      // }).then(res=>{
+      //   good.number++
+      // })
+      Cart.add(good.id).then(res=>{
         good.number++
       })
     },
     reduce(good){
       if(good.number === 1) return
-      axios.post(url.cartReduce,{
-        id: good.id,
-        number: 1
-      }).then(res=>{
+      // axios.post(url.cartReduce,{
+      //   id: good.id,
+      //   number: 1
+      // }).then(res=>{
+      //   good.number--
+      // })
+      Cart.reduce(good.id).then(red=>{
         good.number--
       })
     },
@@ -165,9 +172,17 @@ new Vue({
     removeConfirm(){
       if(this.removeMsg === '确定删除该商品吗？'){
         let {shop,shopIndex,good,goodIndex} = this.removeData
-        axios.post(url.cartRemove,{
-          id: good.id
-        }).then(res => {
+        // axios.post(url.cartRemove,{
+        //   id: good.id
+        // }).then(res => {
+        //   shop.goodsList.splice(goodIndex,1)
+        //   if(!shop.goodsList.length){
+        //     this.lists.splice(shopIndex,1)
+        //     this.removeShop()
+        //   }
+        //   this.showPop = false
+        // })
+        Cart.cartRemove(good.id).then(res=>{
           shop.goodsList.splice(goodIndex,1)
           if(!shop.goodsList.length){
             this.lists.splice(shopIndex,1)
