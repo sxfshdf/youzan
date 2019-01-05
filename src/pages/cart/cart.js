@@ -7,6 +7,8 @@ import axios from 'axios'
 import url from 'js/api.js'
 import Vue from 'vue'
 import mixin from 'js/mixin.js'
+import Velocity from 'velocity-animate'
+
 
 new Vue({
   el: '.container',
@@ -16,7 +18,8 @@ new Vue({
     editingShop: null,
     editingShopIndex: -1,
     showPop: false,
-    removeData: null
+    removeData: null,
+    removeMsg: null
   },
   computed:{
     allSelected:{
@@ -153,19 +156,52 @@ new Vue({
     remove(shop,shopIndex,good,goodIndex){
       this.showPop = true
       this.removeData = {shop,shopIndex,good,goodIndex}
+      this.removeMsg = '确定删除该商品吗？'
+    },
+    removeList(){
+      this.showPop = true
+      this.removeMsg = `确定将所选${this.removeLists.length}个商品删除吗？`
     },
     removeConfirm(){
-      let {shop,shopIndex,good,goodIndex} = this.removeData
-      axios.post(url.cartRemove,{
-        id: good.id
-      }).then(res => {
-        shop.goodsList.splice(goodIndex,1)
-        if(!shop.goodsList.length){
-          this.lists.splice(shopIndex,1)
-          this.removeShop()
-        }
-        this.showPop = false
-      })
+      if(this.removeMsg === '确定删除该商品吗？'){
+        let {shop,shopIndex,good,goodIndex} = this.removeData
+        axios.post(url.cartRemove,{
+          id: good.id
+        }).then(res => {
+          shop.goodsList.splice(goodIndex,1)
+          if(!shop.goodsList.length){
+            this.lists.splice(shopIndex,1)
+            this.removeShop()
+          }
+          this.showPop = false
+        })
+      }else{
+        let ids = []
+        this.removeLists.map(good => {
+          ids.push(good.id)
+        }) 
+        axios.post(url.cartMremove,{ids}).then(res=>{
+          let array = []
+          this.editingShop.goodsList.map(good=>{
+            let index = this.removeLists.findIndex(list=>{
+              return list.id === good.id
+            })
+            if(index === -1){
+              array.push( good )
+            }
+          })
+          if(array.length){
+            this.editingShop.goodsList = array
+          }else{
+            this.lists.splice(this.editingShopIndex,1)
+            this.removeShop()
+          }
+          this.showPop = false
+        }) 
+      }
+    },
+    removeCancal(){
+      this.showPop = false
     },
     removeShop(){
       this.editingShop = null
@@ -173,6 +209,21 @@ new Vue({
       this.lists.map(shop => {
         shop.editing = false
         shop.editingMsg = '编辑'
+      })
+    },
+    start(e,good){
+      good.startX = e.changedTouches[0].clientX
+    },
+    end(e,shopIndex,good,goodIndex){
+      let endX = e.changedTouches[0].clientX
+      let left = '0px'
+      if(good.startX - endX > 100){
+        left = '-60px'
+      }else if(endX - good.startX >100){
+        left='0px'
+      }
+      Velocity(this.$refs[`good-${shopIndex}-${goodIndex}`],{
+        left
       })
     }
   },
