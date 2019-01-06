@@ -27,10 +27,12 @@
           <div class="js-shop-list shop-list">
             <div class="block block-order block-cart" v-for="(shop,shopIndex) in lists">
               <div class="header">
-                <div class="select-group js-select-group" @click="selectShop(shop)">
-                  <span class="check" :class="{checked:shop.checked}" v-show="!editingShop"></span>
-                  <span class="check" :class="{checked:shop.removeChecked}" v-show="editingShop"></span>
+                <div class="select-group js-select-group" @click="selectShop(shop)" v-show="!editingShop">
+                  <span class="check" :class="{checked:shop.checked}"></span>
                 </div> 
+                <div class="select-group js-select-group" @click="selectShop(shop)" v-show="editingShop&&editingShopIndex===shopIndex">
+                  <span class="check" :class="{checked:shop.removeChecked}" ></span>
+                </div>
                 <a class="shop-title">
                   <i class="custom-store-img">店铺：</i>
                   {{shop.shopTitle}}</a>
@@ -50,10 +52,11 @@
                       @touchend="end($event,shopIndex,good,goodIndex)"
                       :ref="'good-'+shopIndex+'-'+goodIndex">
                     <div>
-                      <div class="check-container" @click="selectGood(shop,good)">
-                        <span class="check" :class="{checked:good.checked}" v-show="!editingShop"></span>
-                        <span class="check" :class="{checked:good.removeChecked}" v-show="editingShop"></span>
-                        
+                      <div class="check-container" @click="selectGood(shop,good)" v-show="!editingShop">
+                        <span class="check" :class="{checked:good.checked}" ></span>
+                      </div>
+                      <div class="check-container" @click="selectGood(shop,good)" v-show="editingShop&&editingShopIndex===shopIndex">
+                        <span class="check" :class="{checked:good.removeChecked}" ></span>
                       </div>
                       <div class="name-card clearfix">
                         <a :href="'goods.html?id='+good.id" class="thumb js-goods-link"><img  class="js-lazy" :src="good.img">
@@ -78,7 +81,7 @@
                             <!---->
                             <div class="quantity">
                               <button type="button" class="minus" :class="{disabled:good.number === 1}"></button>
-                              <input type="text" pattern="[0-9]*" class="txt" v-model="good.number">
+                              <input type="text" pattern="[0-9]*" class="txt" v-model="good.number" @input="update(good)">
                               <button type="button" class="plus "></button>
                               <div class="response-area response-area-minus" @click="reduce(good)"></div>
                               <div class="response-area response-area-plus" @click="add(good)"></div>

@@ -19,6 +19,18 @@ class Cart{
       id,
     })
   }
+  static removeArr(arr){
+    let ids = []
+    arr.map(good=>{
+      ids.push(good.id)
+    })
+    return fetch(url.cartMremove,{ids})
+  }
+  static cartUpdate(id,number){
+    return fetch(url.cartUpdate,{
+      id,number
+    })
+  }
 }
 
 export default Cart
