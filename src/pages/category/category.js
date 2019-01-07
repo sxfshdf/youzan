@@ -16,12 +16,14 @@ new Vue({
     topLists: null,
     topIndex: 0,
     subLists: null,
-    rankLists: null
+    rankLists: null,
+    loading: false
   },
   components: {
   //  Foot
   },
   created(){
+    this.loading = true
     this.getTopLists()
     this.getSubLists(0)
   },
@@ -29,6 +31,7 @@ new Vue({
     getTopLists(){
       axios.get(url.topLists).then(res=>{
         this.topLists = res.data.lists
+        this.loading = false
       })
     },
     getSubLists(index,id){

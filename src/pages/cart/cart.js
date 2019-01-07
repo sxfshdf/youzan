@@ -21,7 +21,8 @@ new Vue({
     showPop: false,
     removeData: null,
     removeMsg: null,
-    editing: false
+    editing: false,
+    loading: false
   },
   computed:{
     allSelected:{
@@ -89,6 +90,7 @@ new Vue({
     },
   },
   created(){
+    this.loading = true
     this.getLists()
   },
   methods:{
@@ -106,6 +108,7 @@ new Vue({
           })
         })
         this.lists = lists
+        this.loading = false
       })
     },
     selectGood(shop,good){

@@ -19,7 +19,8 @@ new Vue({
     pageSize: 6,
     loading: false,
     allLoaded: false,
-    bannerLists: null
+    bannerLists: null,
+    loading: false
   },
   components:{
     Foot,Swipe
@@ -51,10 +52,12 @@ new Vue({
     getBanner(){
       axios.get(url.bannerLists).then(res=>{
         this.bannerLists = res.data.lists
+        this.loading = false
       })
     }
   },
   created(){
+    this.loading = true
     this.getData()
     this.getBanner()
   }
