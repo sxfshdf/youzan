@@ -65,6 +65,14 @@ export default {
   background: #000;
   opacity: 0.2;
 }
+.swiper-pagination {
+  margin: 0;
+  text-align: center;
+  position: absolute;
+  bottom: 5px;
+  width: 100%;
+  z-index: 1;
+}
 /*
 button.swiper-pagination-bullet {
   border: none;

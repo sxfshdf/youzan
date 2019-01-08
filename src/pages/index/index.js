@@ -10,6 +10,7 @@ Vue.use(InfiniteScroll)
 
 import Foot from 'components/Foot.vue'
 import Swipe from 'components/Swipe.vue'
+import $ from 'jquery'
 
 new Vue({
   el: '#app',
