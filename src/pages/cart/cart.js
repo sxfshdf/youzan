@@ -9,6 +9,7 @@ import Vue from 'vue'
 import mixin from 'js/mixin.js'
 import Velocity from 'velocity-animate'
 import Cart from 'js/cartService.js'
+// import bus from 'js/bus.js'
 
 
 new Vue({
@@ -21,8 +22,10 @@ new Vue({
     showPop: false,
     removeData: null,
     removeMsg: null,
-    editing: false,
-    loading: false
+    // editing: false,
+    loading: false,
+    goodMoveLeft: false,
+    liDomRef: []
   },
   computed:{
     allSelected:{
@@ -140,6 +143,15 @@ new Vue({
       })
       this.editingShop = shop.editing ? shop : null
       this.editingShopIndex = shop.editing ? shopIndex : -1
+      if(this.goodMoveLeft && this.liDomRef){
+        this.liDomRef.map(li => {
+          Velocity(this.$refs[li][0],{
+              left: '0px'
+            })
+        })
+      }
+      
+      
     },
     add(good){
       // axios.post(url.addCart,{
@@ -260,10 +272,22 @@ new Vue({
     },
     end(e,shopIndex,good,goodIndex){
       let endX = e.changedTouches[0].clientX
+      // console.log(e.changedTouches[0].clientX)
+      let domRef = `good-${shopIndex}-${goodIndex}`
       let left = '0px'
-      if(good.startX - endX > 100){
+      if(good.startX - endX > 0){
+        this.goodMoveLeft = true
+        let array = []
+        array.push(domRef)
+        this.liDomRef = Array.from(new Set(this.liDomRef.concat(array)))
+     
         left = '-60px'
-      }else if(endX - good.startX >100){
+      }else if(endX - good.startX >0){
+        this.goodMoveLeft = false
+        if(this.liDomRef && this.liDomRef.length){
+          let index = this.liDomRef.indexOf(domRef)
+          this.liDomRef.splice(index,1)
+        }
         left='0px'
       }
       if(!this.editingShop){
@@ -272,6 +296,15 @@ new Vue({
         })
       }
       
+      // 
+     
+      // if(this.liDomRef){
+      //   
+      // }
+      
+      // this.liDomRef = `good-${shopIndex}-${goodIndex}`
+      // console.log(e.changedTouches[0])
+      // console.log(this.$refs[`good-${shopIndex}-${goodIndex}`])
     }
   },
   mixins:[mixin]

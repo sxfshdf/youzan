@@ -14,6 +14,7 @@ import axios from 'axios'
 import mixin from  'js/mixin.js'
 import qs from 'qs'
 import Swipe from 'components/Swipe.vue'
+import $ from 'jquery'
 
 
 let {id} = qs.parse(location.search.substring(1))
@@ -31,7 +32,8 @@ new Vue({
     showSku: false,
     skuNum: 1,
     showCartIcon: false,
-    showMsg: false
+    showMsg: false,
+    isShow: false
   },
   components:{ Swipe },
   methods:{
@@ -86,10 +88,21 @@ new Vue({
           },800)
         }
       })
+    },
+    move(){
+      if(window.scrollY > 100){
+        this.isShow = true
+      }else{
+        this.isShow = false
+      }
+    },
+    toTop(){
+      $('html,body').animate({scrollTop: 0},300)
     }
   },
   created(){
     this.getDetail()
+    window.addEventListener('scroll',this.move)
   },
   watch:{
     showSku(val, oldVal){

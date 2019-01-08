@@ -20,7 +20,8 @@ new Vue({
     loading: false,
     allLoaded: false,
     bannerLists: null,
-    loading: false
+    loading: false,
+    isShow: false
   },
   components:{
     Foot,Swipe
@@ -54,11 +55,22 @@ new Vue({
         this.bannerLists = res.data.lists
         this.loading = false
       })
+    },
+    move(){
+      if(window.scrollY > 100){
+        this.isShow = true
+      }else{
+        this.isShow = false
+      }
+    },
+    toTop(){
+      $('html, body').animate({scrollTop: 0},300)
     }
   },
   created(){
     this.loading = true
     this.getData()
     this.getBanner()
+    window.addEventListener('scroll',this.move)
   }
 })
