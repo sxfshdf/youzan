@@ -25,9 +25,17 @@ new Vue({
     // editing: false,
     loading: false,
     goodMoveLeft: false,
-    liDomRef: []
+    liDomRef: [],
+    // isEmpty: false
   },
   computed:{
+    isEmpty(){
+        if(this.lists && this.lists.length){
+          return false
+        }else{
+          return true
+      }
+    },
     allSelected:{
       get(){
         if(this.lists && this.lists.length){

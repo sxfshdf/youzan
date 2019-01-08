@@ -1,3 +1,38 @@
+/* emprty */
+.empty-list {
+  padding-top: 60px;
+  text-align: center;
+}
+.empty-list h2 {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+.empty-list .desc {
+  font-size: 14px;
+  color: #999;
+}
+.empty-list .go-homepage-btn {
+  box-sizing: border-box;
+  width: 104px;
+  height: 36px;
+  line-height: 18px;
+  padding: 8px 0;
+  font-size: 14px;
+  border: 1px solid #f60;
+  margin: 30px auto 0;
+  color: #f60;
+  border-radius: 3px;
+}
+.empty-list .go-homepage-btn a {
+  display: block;
+  color: #f60;
+}
+
+
+
+
 .van-modal {
   position: fixed;
   width: 100%;

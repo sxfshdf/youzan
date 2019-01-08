@@ -3,7 +3,7 @@
     <div class="content">
       <div class="user-infos">
         <div class="pull-left avatar">
-          <div class="img" style="background-image: url(https://img.yzcdn.cn/upload_files/no_pic.png?imageView2/2/w/280/h/280/q/75/format/webp);"></div>
+          <div class="img" style="background-image: url(http://163-music-demo.test.upcdn.net/list-cover-6.jpg);"></div>
         </div>
         <div class="pull-left desc">
           <p>tonyfree</p>

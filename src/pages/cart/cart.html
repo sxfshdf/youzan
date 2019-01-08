@@ -23,6 +23,13 @@
   
   
   <div class="container " style="min-height: 581px;" v-cloak>
+    <div class="empty-list" v-show="isEmpty">
+      <h2>购物车快饿瘪了T.T</h2>
+      <div class="desc">快给我挑点宝贝</div>
+      <div class="go-homepage-btn">
+        <a href="index.html">去逛逛</a>
+      </div>
+    </div>
     <div class="loading-more" v-if="loading"><span></span></div>
     <div v-else>
       <div class="content clearfix js-page-content">
@@ -107,7 +114,7 @@
               
             </div>
             <div style="padding:0;" class="js-bottom-opts bottom-fix">
-              <div class="go-shop-tip js-go-shop-tip c-orange font-size-12">
+              <div class="go-shop-tip js-go-shop-tip c-orange font-size-12" v-show="!isEmpty">
                 你需要分开结算每个店铺的商品哦~
               </div>
               <div class="bottom-cart clear-fix">
