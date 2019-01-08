@@ -1990,7 +1990,7 @@
     margin: 0
   }
   
-  .swiper-container {
+  /* .swiper-container {
     margin: 0 auto;
     position: relative;
     -webkit-backface-visibility: hidden;
@@ -2074,7 +2074,7 @@
   
   .swiper-active-switch {
     background-position: -1px -8px
-  }
+  } */
   
   @media only screen and (-webkit-min-device-pixel-ratio:1.5),
   only screen and (min--moz-device-pixel-ratio:1.5),
