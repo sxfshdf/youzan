@@ -27,6 +27,7 @@ export default {
       return this.$store.state.lists
     },
     provinceName(){
+      if(!this.addressData.list) return 
       let value = this.provinceValue
       if(value === -1) return  
       let index = this.addressData.list.findIndex(item => {
@@ -35,6 +36,7 @@ export default {
       return this.addressData.list[index].label
     },
     cityName(){
+      if(!this.cityList) return 
       let value = this.cityValue
       if(value === -1) return 
       let index = this.cityList.findIndex(item => {
@@ -43,6 +45,7 @@ export default {
       return this.cityList[index].label
     },
     districtName(){
+      if(!this.districtList) return 
       let value = this.districtValue
       if(value === -1) return 
       let index = this.districtList.findIndex(item => {
@@ -146,7 +149,10 @@ export default {
   },
   watch:{
     provinceValue(value){
-      if(value === -1) return  
+      if(value === -1) return 
+      if(this.type === 'edit'){
+        this.cityValue = parseInt(this.instance.cityValue)
+      } 
       let index = this.addressData.list.findIndex(item => {
         return item.value === value
       })
@@ -154,21 +160,20 @@ export default {
       this.cityValue = -1
       this.districtValue = -1
 
-      if(this.type === 'edit'){
-        this.cityValue = parseInt(this.instance.cityValue)
-      }
+      
     },
     cityValue(value){
       if(value === -1) return 
+      if(this.type === 'edit'){
+        this.districtValue = parseInt(this.instance.districtValue)
+      }
       let index = this.cityList.findIndex(item => {
         return item.value === value
       })
       this.districtList = this.cityList[index].children
       this.districtValue = -1
 
-      if(this.type === 'edit'){
-        this.districtValue = parseInt(this.instance.districtValue)
-      }
+      
     },
     lists: {
       handler(val,oldVal){
