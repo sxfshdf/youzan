@@ -6,7 +6,7 @@
           <div class="img" style="background-image: url(http://163-music-demo.test.upcdn.net/list-cover-6.jpg);"></div>
         </div>
         <div class="pull-left desc">
-          <p>tonyfree</p>
+          <p>sxfshdf</p>
         </div>
       </div>
       <div class="order-related">

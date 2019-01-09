@@ -50,7 +50,7 @@
         </div>
         <div class="block-item">
           <label>详细地址</label>
-          <input type="text" placeholder="街道门牌信息" @focus="text" name="address_detail" v-model.trim="address" maxlength="100">
+          <input type="text" placeholder="街道门牌信息" autocomplete="off"  @focus="text" name="address_detail" v-model.trim="address" maxlength="100">
         </div>
       </div>
     </div>
