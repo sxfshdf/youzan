@@ -148,7 +148,8 @@ export default {
     }
   },
   watch:{
-    provinceValue(value){
+    provinceValue(value,oldVal){
+      
       if(value === -1) return 
       if(this.type === 'edit'){
         this.cityValue = parseInt(this.instance.cityValue)
@@ -157,12 +158,17 @@ export default {
         return item.value === value
       })
       this.cityList = this.addressData.list[index].children
-      this.cityValue = -1
-      this.districtValue = -1
-
-      
+      this.districtList = []
+      console.log("p",oldVal)
+      console.log("p",value)
+      console.log("p",this.districtList.length)
+      if(oldVal !== -1 && value !== oldVal){
+        this.cityValue = -1
+        this.districtValue = -1
+      }
+     
     },
-    cityValue(value){
+    cityValue(value,oldVal){
       if(value === -1) return 
       if(this.type === 'edit'){
         this.districtValue = parseInt(this.instance.districtValue)
@@ -171,8 +177,15 @@ export default {
         return item.value === value
       })
       this.districtList = this.cityList[index].children
-      this.districtValue = -1
 
+      console.log("city",oldVal)
+      console.log("city",value)
+      console.log("city",this.districtList.length)
+
+      if(oldVal !== -1 && value !== oldVal){
+        this.districtValue = -1
+      }
+     
       
     },
     lists: {
