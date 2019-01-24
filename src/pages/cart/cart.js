@@ -24,9 +24,8 @@ new Vue({
     removeMsg: null,
     // editing: false,
     loading: false,
-    goodMoveLeft: false,
-    liDomRef: [],
     // isEmpty: false
+    refTouchMove: ''
   },
   computed:{
     isEmpty(){
@@ -280,22 +279,17 @@ new Vue({
     },
     end(e,shopIndex,good,goodIndex){
       let endX = e.changedTouches[0].clientX
-      // console.log(e.changedTouches[0].clientX)
+
       let domRef = `good-${shopIndex}-${goodIndex}`
+      if(this.refTouchMove && this.refTouchMove !== domRef) {
+        Velocity(this.$refs[`${this.refTouchMove}`],{
+          left: '0px'
+        })
+      }
       let left = '0px'
       if(good.startX - endX > 0){
-        this.goodMoveLeft = true
-        let array = []
-        array.push(domRef)
-        this.liDomRef = Array.from(new Set(this.liDomRef.concat(array)))
-     
         left = '-60px'
       }else if(endX - good.startX >0){
-        this.goodMoveLeft = false
-        if(this.liDomRef && this.liDomRef.length){
-          let index = this.liDomRef.indexOf(domRef)
-          this.liDomRef.splice(index,1)
-        }
         left='0px'
       }
       if(!this.editingShop){
@@ -303,7 +297,7 @@ new Vue({
           left
         })
       }
-      
+      this.refTouchMove = domRef
       // 
      
       // if(this.liDomRef){
