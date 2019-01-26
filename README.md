@@ -9,4 +9,5 @@
 6. 购物车
 7. 收货地址管理
 <br>
-单页面结构： https://sxfshdf.github.io/youzan-single/dist/
+单页面：https://github.com/sxfshdf/youzan-single <br>
+预览： https://sxfshdf.github.io/youzan-single/dist/
